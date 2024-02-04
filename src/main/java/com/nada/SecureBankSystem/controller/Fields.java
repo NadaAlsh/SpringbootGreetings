@@ -9,6 +9,7 @@ public class Fields {
 
     private String name;
 
+
     public String getName() {
         return name;
     }
