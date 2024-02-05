@@ -24,34 +24,31 @@ public class CodedController {
     }
 
     @PostMapping("/farewell")
-    public String farewell(@RequestBody Fields requestBody){
+    public String farewell(@RequestBody Fields requestBody) {
         String name = requestBody.getName();
-        return "Goodbye, " +name+ "!";
+        return "Goodbye, " + name + "!";
     }
 
     @PostMapping("/addContact")
     public ResponseEntity<String> addContact(@RequestBody Contact contact) {
-        if (contactExists(contact.getEmail())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Contact already exists with this email!");
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getEmail().equals(contact.getEmail())) {
+                return ResponseEntity.badRequest().body("Contact already exists with this email!");
+            }
         }
         contacts.add(contact);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Contact added successfully!");
+        return ResponseEntity.ok("Contact added successfully!");
     }
-        private boolean contactExists(String email) {
-            return contacts.stream().anyMatch(c-> c.getEmail().equals(email));
-        }
+
 
     @GetMapping("/getContactDetails")
     public ResponseEntity<Object> getContactDetails(@RequestParam String name) {
-        Optional<Contact> foundContact = contacts.stream()
-                .filter(c -> c.getName().equals(name))
-                .findFirst();
-
-        if(foundContact.isPresent()){
-           return ResponseEntity.ok(foundContact.get());
-        } else{
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Contact not found");
+        for(int i = 0; i < contacts.size(); i++){
+            if(contacts.get(i).getName().equals(name)){
+                return ResponseEntity.ok(contacts.get(i));
+            }
         }
+            return ResponseEntity.badRequest().body("Contact not found");
 
     }
 }
