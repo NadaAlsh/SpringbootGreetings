@@ -1,5 +1,5 @@
 
-package com.nada.SecureBankSystem.controller;
+package com.nada.SecureBankSystem.bo;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

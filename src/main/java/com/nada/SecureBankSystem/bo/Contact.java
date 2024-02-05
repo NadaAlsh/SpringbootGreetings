@@ -1,4 +1,4 @@
-package com.nada.SecureBankSystem.controller;
+package com.nada.SecureBankSystem.bo;
 
 public class Contact {
 
