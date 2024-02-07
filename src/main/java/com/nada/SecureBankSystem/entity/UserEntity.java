@@ -1,13 +1,13 @@
 package com.nada.SecureBankSystem.entity;
 
-import com.nada.SecureBankSystem.bo.Status;
+import com.nada.SecureBankSystem.util.enums.Status;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "bankUsers")
 public class UserEntity {
-    @Id
+    @Id // this indicates that I assigned the id to be my primary key
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -63,4 +63,5 @@ public class UserEntity {
     public void setStatus(Status status) {
         this.status = status;
     }
+
 }

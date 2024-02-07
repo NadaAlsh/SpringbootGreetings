@@ -1,7 +1,5 @@
 package com.nada.SecureBankSystem.bo.user;
 
-import com.nada.SecureBankSystem.bo.Status;
-
 public class CreateUserRequest {
 
     private String name;
@@ -29,9 +27,7 @@ public class CreateUserRequest {
         this.phone = phone;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
     public String getStatus() {return status; }
 

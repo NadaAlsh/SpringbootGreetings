@@ -1,13 +1,10 @@
 package com.nada.SecureBankSystem.controller.UserController;
 
-import com.nada.SecureBankSystem.bo.Status;
 import com.nada.SecureBankSystem.bo.user.CreateUserRequest;
+import com.nada.SecureBankSystem.bo.user.UpdateUserStatusRequest;
 import com.nada.SecureBankSystem.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -20,13 +17,21 @@ public class UserController {
     }
 
     @PostMapping("/create-user")
-    public ResponseEntity<String> createUser(@RequestBody CreateUserRequest createUserRequest){
-        userService.saveUser(createUserRequest);
+    public ResponseEntity<String> createUser(@RequestBody CreateUserRequest createUserRequest) {
+        try {
+            userService.saveUser(createUserRequest);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
         return ResponseEntity.ok("User created successfully");
     }
-    @PostMapping("/updateStatus")
-    public ResponseEntity<String> updateStatus(@RequestParam Long userId, String newStatus){
-         userService.updateStatus(userId, newStatus);
-        return ResponseEntity.ok("Status updated successfully");
+    @PutMapping("/updateStatus")
+    public ResponseEntity<String> updateUserStatus(@RequestParam Long userId, @RequestBody UpdateUserStatusRequest updateUserStatusRequest){
+        try {
+            userService.updateUserStatus(userId, updateUserStatusRequest);
+        }catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+         return ResponseEntity.ok("Status updated successfully");
     }
 }
