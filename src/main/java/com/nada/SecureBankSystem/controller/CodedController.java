@@ -14,7 +14,7 @@ public class CodedController {
 
     @GetMapping("/sayHi")
     public String sayHi() {
-        return "Welcome";
+        return "Welcome Nada";
     }
 
     @GetMapping("/greet")

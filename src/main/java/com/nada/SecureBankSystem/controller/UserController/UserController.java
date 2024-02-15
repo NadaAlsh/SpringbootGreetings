@@ -2,7 +2,8 @@ package com.nada.SecureBankSystem.controller.UserController;
 
 import com.nada.SecureBankSystem.bo.user.CreateUserRequest;
 import com.nada.SecureBankSystem.bo.user.UpdateUserStatusRequest;
-import com.nada.SecureBankSystem.service.UserService;
+import com.nada.SecureBankSystem.service.user.UserService;
+import com.nada.SecureBankSystem.service.admin.GuestSuggestionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,13 @@ public class UserController {
 
     private final UserService userService;
 
+    private final GuestSuggestionService suggestionService;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService, GuestSuggestionService suggestionService) {
+
         this.userService = userService;
+        this.suggestionService = suggestionService;
     }
 
     @PostMapping("/create-user")
@@ -21,7 +26,7 @@ public class UserController {
         try {
             userService.saveUser(createUserRequest);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Status should be either ACTIVE or INACTIVE");
         }
         return ResponseEntity.ok("User created successfully");
     }
@@ -30,7 +35,7 @@ public class UserController {
         try {
             userService.updateUserStatus(userId, updateUserStatusRequest);
         }catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body("Error in updating your status");
         }
          return ResponseEntity.ok("Status updated successfully");
     }

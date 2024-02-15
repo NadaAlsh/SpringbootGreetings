@@ -11,7 +11,7 @@ public class UserSettingsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean recieveNewsLetter;
+    private boolean receiveNewsLetter;
 
     private String preferredLanguage;
 
@@ -23,12 +23,12 @@ public class UserSettingsEntity {
         this.id = id;
     }
 
-    public boolean isRecieveNewsLetter() {
-        return recieveNewsLetter;
+    public boolean isReceiveNewsLetter() {
+        return receiveNewsLetter;
     }
 
-    public void setRecieveNewsLetter(boolean recieveNewsLetter) {
-        this.recieveNewsLetter = recieveNewsLetter;
+    public void setReceiveNewsLetter(boolean receiveNewsLetter) {
+        this.receiveNewsLetter = receiveNewsLetter;
     }
 
     public String getPreferredLanguage() {

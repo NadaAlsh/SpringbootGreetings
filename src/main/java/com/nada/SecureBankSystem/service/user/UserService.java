@@ -1,7 +1,9 @@
-package com.nada.SecureBankSystem.service;
+package com.nada.SecureBankSystem.service.user;
 
 import com.nada.SecureBankSystem.bo.user.CreateUserRequest;
 import com.nada.SecureBankSystem.bo.user.UpdateUserStatusRequest;
+
+import java.util.List;
 
 public interface UserService {
     void saveUser(CreateUserRequest createUserRequest);
@@ -10,4 +12,5 @@ public interface UserService {
 
     void updateUserStatus(Long userId, UpdateUserStatusRequest updateUserRequest);
 
+    List<String> getAllUsersWithStrongPassword();
 }
